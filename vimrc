@@ -100,7 +100,6 @@ let g:miniBufExplMapWindowNavVim = 1
 let g:miniBufExplMapWindowNavArrows = 1
 let g:miniBufExplMapCTabSwitchBufs = 1
 let g:miniBufExplModSelTarget = 1 
-"let g:miniBufExplVSplit = 20
 
 
 let g:clang_auto_select=1
@@ -117,11 +116,18 @@ let g:clang_auto_user_options="path, .clang_complete"
 let g:clang_use_library=1
 let g:clang_close_preview=1
 set completeopt-=preview
-"let g:clang_library_path="/usr/lib/llvm"
 let g:clang_sort_algo="priority"
 let g:clang_complete_macros=1
 let g:clang_complete_patterns=0
 let g:Tlist_Use_Right_Window=1
+
+"Configuration for YouCompleteMe
+let g:ycm_confirm_extra_conf = 0
+let g:syntastic_always_populate_loc_list = 1
+let g:ycm_collect_identifiers_from_tags_files = 1
+let g:ycm_global_ycm_extra_conf='~/worksrc/sysscripts/ycm_extra_conf.py'
+nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
 
 "Csupport
 let g:alternateNoDefaultAlternate = 1
