@@ -36,9 +36,28 @@ flags = [
 ]
 # For check the compiler paths call `gcc -print-prog-name=cc1plus` -v 
 # Compatibility with clang complete
-with open('.clang_complete') as clf:
-    content = clf.read().splitlines()
-    flags += content
+if os.path.isfile('.clang_complete'):
+    with open('.clang_complete') as clf:
+        content = clf.read().splitlines()
+        flags += content
+else:
+    flags += [
+            '-isystem',
+            '/usr/lib/gcc/x86_64-unknown-linux-gnu/4.9.1/../../../../include/c++/4.9.1',
+            '-isystem',
+            '/usr/lib/gcc/x86_64-unknown-linux-gnu/4.9.1/../../../../include/c++/4.9.1/x86_64-unknown-linux-gnu',
+            '-isystem',
+            '/usr/lib/gcc/x86_64-unknown-linux-gnu/4.9.1/../../../../include/c++/4.9.1/backward',
+            '-isystem',
+            '/usr/lib/gcc/x86_64-unknown-linux-gnu/4.9.1/include',
+            '-isystem',
+            '/usr/local/include',
+            '-isystem',
+            '/usr/lib/gcc/x86_64-unknown-linux-gnu/4.9.1/include-fixed',
+            '-isystem',
+            '/usr/include'
+        ]
+
 
 if compilation_database_folder:
     database = ycm_core.CompilationDatabase(compilation_database_folder)
