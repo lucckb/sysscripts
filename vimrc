@@ -65,7 +65,8 @@ set hlsearch
 
 filetype plugin indent on
 if has("gui_running")
-	colorscheme midnight
+	"colorscheme midnight
+	colorscheme eclipse
 	set guioptions-=m
 	set guioptions-=T
 elseif ( &t_Co == 256 )
