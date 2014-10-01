@@ -8,7 +8,7 @@ from clang_helpers import PrepareClangFlags
 # Most projects will NOT need to set this to anything; you can just change the
 # 'flags' list of compilation flags. Notice that YCM itself uses that approach.
 def find_build_folder():
-    current = 'build'
+    current = '.build.json'
     for i in range(10):
         if os.path.exists(current):
             return current
