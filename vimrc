@@ -32,16 +32,14 @@ set number
 set errorformat+=%D%*\\a[%*\\d]\:\ Entering\ directory\ '%f',%X%*\\a[%*\\d]\:\ Leaving\ directory\ '%f',%D%*\\a\:\ Entering\ directory\ '%f',%X%*\\a\:\ Leaving\ directory\ '%f'
 
 function! LBRelNumberOn()
-	if( &relativenumber == 1 || &number == 1 )
+	if( &relativenumber == 0 )
 		setlocal relativenumber
-		setlocal nonumber
 	endif
 endfunction
 
 function! LBRelNumberOff()
-	if( &relativenumber == 1 || &number == 1 )
+	if( &relativenumber == 1 )
 		setlocal norelativenumber
-		setlocal number
 	endif
 endfunction
 
