@@ -169,6 +169,13 @@ nnoremap <leader>l :bn<CR>
 nnoremap <leader>ss :TlistClose<CR>:NERDTreeClose<CR>:mks! .session.vim<CR>
 noremap <F2> :ccl<CR>
 
+
+"Grep search
+if !exists("lb_grep_path")
+	let lb_grep_path='.'
+endif
+nnoremap <leader>fw :execute " grep -srnw --binary-files=without-match --exclude=tags --exclude-dir '.svn' --exclude-dir '.hg' " . lb_grep_path . " -e " . expand("<cword>") . " " <bar> cwindow<CR>
+
 function LBSetColors()
 "Color setup
 if !has("gui_running") && (&t_Co <= 16)
