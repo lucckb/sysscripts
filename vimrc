@@ -174,7 +174,7 @@ noremap <F2> :ccl<CR>
 if !exists("lb_grep_path")
 	let lb_grep_path='.'
 endif
-nnoremap <leader>fw :execute " grep -srnw --binary-files=without-match --exclude=tags --exclude-dir '.svn' --exclude-dir '.hg' " . lb_grep_path . " -e " . expand("<cword>") . " " <bar> cwindow<CR>
+nnoremap <leader>fw :execute " grep -srnw --binary-files=without-match --exclude='*.lss' --exclude=tags --exclude-dir='.svn' --exclude-dir='.hg' " . lb_grep_path . " -e " . expand("<cword>") . " " <bar> cwindow<CR>
 
 function LBSetColors()
 "Color setup
