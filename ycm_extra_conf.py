@@ -29,7 +29,6 @@ flags = [
 '-Wextra',
 '-Wno-variadic-macros',
 '-fexceptions',
-'-DUSE_CLANG_COMPLETER',
 '-nostdinc',
 '-std=c++11',
 '-x', 'c++',
