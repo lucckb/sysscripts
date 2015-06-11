@@ -42,17 +42,17 @@ if os.path.isfile('.clang_complete'):
 else:
     flags += [
             '-isystem',
-            '/usr/lib/gcc/x86_64-unknown-linux-gnu/4.9.2/../../../../include/c++/4.9.2',
+            '/usr/lib/gcc/x86_64-unknown-linux-gnu/5.1.0/../../../../include/c++/5.1.0',
             '-isystem',
-            '/usr/lib/gcc/x86_64-unknown-linux-gnu/4.9.2/../../../../include/c++/4.9.2/x86_64-unknown-linux-gnu',
+            '/usr/lib/gcc/x86_64-unknown-linux-gnu/5.1.0/../../../../include/c++/5.1.0/x86_64-unknown-linux-gnu',
             '-isystem',
-            '/usr/lib/gcc/x86_64-unknown-linux-gnu/4.9.2/../../../../include/c++/4.9.2/backward',
+            '/usr/lib/gcc/x86_64-unknown-linux-gnu/5.1.0/../../../../include/c++/5.1.0/backward',
             '-isystem',
-            '/usr/lib/gcc/x86_64-unknown-linux-gnu/4.9.2/include',
+            '/usr/lib/gcc/x86_64-unknown-linux-gnu/5.1.0/include',
             '-isystem',
             '/usr/local/include',
             '-isystem',
-            '/usr/lib/gcc/x86_64-unknown-linux-gnu/4.9.2/include-fixed',
+            '/usr/lib/gcc/x86_64-unknown-linux-gnu/5.1.0/include-fixed',
             '-isystem',
             '/usr/include'
         ]
