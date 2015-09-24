@@ -1,4 +1,4 @@
-if v:progname =~? "evim"
+if v:progname =~? "GGevim"
   finish
 endif
 set nocompatible
@@ -139,8 +139,9 @@ let &makeprg = 'make $* -j' . (system('nproc'))
 "Keyboard mapping stuff
 nnoremap <silent> <leader>1 :NERDTreeToggle<CR>
 nnoremap <silent> <leader>2 :TlistToggle<CR>
-nnoremap <silent> <leader>mc :make!<CR>
+nnoremap <silent> <leader>mm :make!<CR>
 nnoremap <silent> <leader>mp :make! program<CR>
+nnoremap <silent> <leader>mc :make! clean<CR>
 nnoremap <silent> <leader>oc :!omake <CR>
 nnoremap <silent> <C-s> :w <CR>
 
