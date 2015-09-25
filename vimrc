@@ -178,18 +178,6 @@ endif
 nnoremap <leader>fw :execute " grep -srnw --binary-files=without-match --exclude='*.lss' --exclude=tags --exclude-dir='.svn' --exclude-dir='.hg' " . lb_grep_path . " -e " . expand("<cword>") . " " <bar> cwindow<CR>
 
 
-" find files and populate the quickfix list
-fun! FindFiles(filename)
-  let error_file = tempname()
-  silent exe '!find ' .g:lb_grep_path.  ' -iname "'.a:filename.'" | xargs file | sed "s/:/:1:/" > '.error_file
-  set errorformat=%f:%l:%m
-  exe "cfile ". error_file
-  copen
-  call delete(error_file)
-endfun
-command! -nargs=1 FindFile call FindFiles(<q-args>)
-
-
 function LBSetColors()
 "Color setup
 if !has("gui_running") && (&t_Co <= 16)
