@@ -130,6 +130,9 @@ let g:ycm_global_ycm_extra_conf='~/worksrc/sysscripts/ycm_extra_conf.py'
 nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
 nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
 
+"CtrlP
+let g:ctrlp_working_path_mode = 'ra'
+
 "Csupport
 let g:alternateNoDefaultAlternate = 1
 
