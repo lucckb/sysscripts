@@ -222,7 +222,11 @@ au FileType c,cpp inorea #d #define
 "Extra commands
 command -nargs=1 -complete=file	Ctags :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q "<args>"
 
+"Horizontal help
+autocmd FileType help wincmd L
 
+"Single line compilation
+let g:C_CplusCFlags= '-Wall -g -O0 -c --std=gnu++11'
 
 "Parse extra custom config file
 if filereadable(".vim.custom")
