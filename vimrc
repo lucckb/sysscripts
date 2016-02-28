@@ -130,9 +130,6 @@ let g:ycm_global_ycm_extra_conf='~/worksrc/sysscripts/ycm_extra_conf.py'
 nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
 nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
 
-"CtrlP
-let g:ctrlp_working_path_mode = 'ra'
-
 "Csupport
 let g:alternateNoDefaultAlternate = 1
 
@@ -178,8 +175,13 @@ noremap <F2> :ccl<CR>
 if !exists("lb_grep_path")
 	let lb_grep_path='.'
 endif
-nnoremap <leader>fw :execute " grep -srnw --binary-files=without-match --exclude='*.lss' --exclude=tags --exclude-dir='.svn' --exclude-dir='.hg' " . lb_grep_path . " -e " . expand("<cword>") . " " <bar> cwindow<CR>
+nnoremap <leader>fw :execute " grep -srnw --binary-files=without-match --exclude='*.lss' --exclude=tags --exclude-dir='.git' --exclude-dir='.hg' " . lb_grep_path . " -e " . expand("<cword>") . " " <bar> cwindow<CR>
 
+function FZFLB(dir)
+	execute ':FZF '. a:dir
+endfunction
+
+nnoremap <C-p> :call FZFLB(lb_grep_path) <CR>
 
 function LBSetColors()
 "Color setup
