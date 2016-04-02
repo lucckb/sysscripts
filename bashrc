@@ -111,3 +111,15 @@ if [ -e /usr/share/terminfo/x/xterm-256color ]; then
 else
         export TERM='xterm-color'
 fi
+
+#Grep files 
+function cgrep() {
+	if [ $# -eq 2 ]; then
+		local d="$2"
+	else
+		local d='.'
+	fi
+	grep -n -r -i "$1"  --include '*.hpp' --include '*.h' --include '*.c' \
+		--include '*.cpp' --include '*.S' $d
+}
+
