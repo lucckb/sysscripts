@@ -230,6 +230,44 @@ autocmd FileType help wincmd L
 "Single line compilation
 let g:C_CplusCFlags= '-Wall -g -O0 -c --std=gnu++11'
 
+"airline config
+"
+  if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+  endif
+
+" unicode symbols
+let g:airline_left_sep = '»'
+let g:airline_left_sep = '▶'
+let g:airline_right_sep = '«'
+let g:airline_right_sep = '◀'
+"let g:airline_symbols.crypt = '🔒'
+let g:airline_symbols.linenr = '␊'
+let g:airline_symbols.linenr = '␤'
+let g:airline_symbols.linenr = '¶'
+let g:airline_symbols.maxlinenr = '☰'
+let g:airline_symbols.maxlinenr = ''
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.paste = 'ρ'
+let g:airline_symbols.paste = 'Þ'
+let g:airline_symbols.paste = '∥'
+let g:airline_symbols.spell = 'Ꞩ'
+let g:airline_symbols.notexists = '∄'
+let g:airline_symbols.whitespace = 'Ξ'
+let g:airline_symbols.readonly = '࿕'
+let g:airline#extensions#branch#displayed_head_limit = 12
+let g:airline#extensions#branch#format = 1
+let g:airline#extensions#whitespace#show_message = 0
+let g:airline#extensions#tabline#enabled = 0
+"let g:airline#extensions#whitespace#enabled = 0
+let g:airline#extensions#default#layout = [
+      \ [ 'b', 'c' ],
+      \ [ 'x', 'z', 'error', 'warning' ]
+      \ ]
+
+
+
+
 "Parse extra custom config file
 if filereadable(".vim.custom")
     so .vim.custom
