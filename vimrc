@@ -12,7 +12,7 @@ set wim=longest,list
 set wrap
 set encoding=utf-8
 set shiftwidth=4 tabstop=4 noexpandtab cino=t0
-set guifont=Ubuntu\ Mono\ 12
+set guifont=Monospace\ 11
 set clipboard=unnamedplus
 set foldmethod=syntax
 set foldlevel=30
@@ -64,7 +64,8 @@ set hlsearch
 filetype plugin indent on
 if has("gui_running")
 	"colorscheme midnight
-	colorscheme eclipse
+	"colorscheme eclipse
+	colorscheme lettuce
 	set guioptions-=m
 	set guioptions-=T
 elseif ( &t_Co == 256 )
@@ -181,7 +182,7 @@ function FZFLB(dir)
 	execute ':FZF '. a:dir
 endfunction
 
-nnoremap <C-p> :call FZFLB(lb_grep_path) <CR>
+"nnoremap <C-p> :call FZFLB(lb_grep_path) <CR>
 
 function LBSetColors()
 "Color setup
