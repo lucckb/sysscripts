@@ -12,8 +12,14 @@ set wim=longest,list
 set wrap
 set encoding=utf-8
 set shiftwidth=4 tabstop=4 noexpandtab cino=t0
-set guifont=Monospace\ 11
-set clipboard=unnamedplus
+if has("win32") 
+	set guifont=Consolas:h11:cEASTEUROPE:qDRAFT
+	set clipboard=unnamed
+else
+	set guifont=Monospace\ 11
+	set clipboard=unnamedplus
+	runtime ftplugin/man.vim
+endif
 set foldmethod=syntax
 set foldlevel=30
 "set undofile
@@ -22,7 +28,38 @@ set showmode
 set ttyfast
 set laststatus=2
 set shiftround
-runtime ftplugin/man.vim
+
+"vimplug
+call plug#begin('~/.vim/plugged')
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'flazz/vim-colorschemes'
+Plug 'scrooloose/nerdtree'
+Plug 'majutsushi/tagbar'
+Plug 'kien/ctrlp.vim'
+Plug 'vim-scripts/c.vim'
+Plug 'tpope/vim-fugitive'
+Plug 'SirVer/ultisnips'
+Plug 'python-mode/python-mode'
+Plug 'vim-scripts/armasm'
+Plug 'jlanzarotta/bufexplorer'
+
+function! BuildYCM(info)
+  " info is a dictionary with 3 fields
+  " - name:   name of the plugin
+  " - status: 'installed', 'updated', or 'unchanged'
+  " - force:  set on PlugInstall! or PlugUpdate!
+  if a:info.status == 'installed' || a:info.force
+	if has("win32") 
+		!python3 ./install.py --clang-completer
+	else
+		!python3 ./install.py --clang-completer --system-libclang --system-boost
+	endif
+  endif
+endfunction
+Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
+call plug#end()
+"vimplug end
 
 "Automatic relative number on focus
 set number
@@ -63,10 +100,8 @@ set hlsearch
 
 filetype plugin indent on
 if has("gui_running")
-	"colorscheme midnight
-	"colorscheme eclipse
-	colorscheme lettuce
-	set guioptions-=m
+	colorscheme summerfruit256
+	"set guioptions-=m
 	set guioptions-=T
 elseif ( &t_Co == 256 )
 	colorscheme lettuce
@@ -92,6 +127,11 @@ au Filetype html set shiftwidth=2
 au BufRead,BufNewFile *.asd set filetype=lisp
 au BufRead,BufNewFile *.txt set filetype=text
 au BufRead,BufNewFile *.nvm set filetype=nvm
+au BufNewFile,BufRead CMakeLists.txt set filetype=cmake tw=0
+au BufNewFile,BufRead *.cmake set filetype=cmake tw=0
+au BufNewFile,BufRead *.rs set filetype=rust tw=0
+au BufNewFile,BufRead *.S set filetype=armasm tw=0
+
 
 "Enable syntax checking
 syntax on
@@ -125,11 +165,11 @@ let g:Tlist_Use_Right_Window=1
 let g:ycm_confirm_extra_conf = 0
 let g:syntastic_always_populate_loc_list = 1
 let g:ycm_collect_identifiers_from_tags_files = 1
-let g:ycm_add_preview_to_completeopt = 0
-let g:ycm_autoclose_preview_window_after_insertion = 0
+let g:ycm_add_preview_to_completeopt = 1
+let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_global_ycm_extra_conf='~/worksrc/sysscripts/ycm_extra_conf.py'
-let g:ycm_server_python_interpreter='/usr/bin/python2'
-nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+nnoremap <leader>jd :YcmCompleter GoToDefinition<CR>
+nnoremap <leader>je :YcmCompleter GoToDeclaration<CR>
 nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
 
 "Csupport
@@ -140,11 +180,10 @@ let &makeprg = 'make $* -j' . (system('nproc'))
 
 "Keyboard mapping stuff
 nnoremap <silent> <leader>1 :NERDTreeToggle<CR>
-nnoremap <silent> <leader>2 :TlistToggle<CR>
+nnoremap <silent> <leader>2 :TagbarToggle<CR>
 nnoremap <silent> <leader>mm :make!<CR>
 nnoremap <silent> <leader>mp :make! program<CR>
 nnoremap <silent> <leader>mc :make! clean<CR>
-nnoremap <silent> <leader>oc :!omake <CR>
 nnoremap <silent> <C-s> :w <CR>
 
 "Switch folding
@@ -179,13 +218,8 @@ if !exists("lb_grep_path")
 endif
 nnoremap <leader>fw :execute " grep -srnw --binary-files=without-match --exclude='*.lss' --exclude=tags --exclude-dir='.git' --exclude-dir='.hg' " . lb_grep_path . " -e " . expand("<cword>") . " " <bar> cwindow<CR>
 
-function FZFLB(dir)
-	execute ':FZF '. a:dir
-endfunction
 
-"nnoremap <C-p> :call FZFLB(lb_grep_path) <CR>
-
-function LBSetColors()
+function! LBSetColors()
 "Color setup
 if !has("gui_running") && (&t_Co <= 16)
 	hi Pmenu      ctermfg=Cyan    ctermbg=Blue cterm=None guifg=Cyan guibg=DarkBlue
@@ -213,24 +247,27 @@ nnoremap <up> <nop>
 nnoremap <down> <nop>
 nnoremap <left> <nop>
 nnoremap <right> <nop>
+noremap <PAGEUP> <nop>
+nnoremap <PAGEDOWN> <nop>
 inoremap <up> <nop>
 inoremap <down> <nop>
 inoremap <left> <nop>
 inoremap <right> <nop>
+inoremap <PAGEUP> <nop>
+inoremap <PAGEDOWN> <nop>
 
 "Special abrev for C and C++
-au FileType c,cpp inorea //- /* ------------------------------------------------------------------ */
 au FileType c,cpp inorea #i #include
 au FileType c,cpp inorea #d #define
 
 "Extra commands
-command -nargs=1 -complete=file	Ctags :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q "<args>"
+command! -nargs=1 -complete=file	Ctags :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q "<args>"
 
 "Horizontal help
 autocmd FileType help wincmd L
 
 "Single line compilation
-let g:C_CplusCFlags= '-Wall -g -O0 -c --std=gnu++11'
+let g:C_CplusCFlags= '-Wall -g -O0 -c --std=gnu++14'
 
 "airline config
 "
@@ -239,36 +276,32 @@ let g:C_CplusCFlags= '-Wall -g -O0 -c --std=gnu++11'
   endif
 
 " unicode symbols
-let g:airline_left_sep = '»'
-let g:airline_left_sep = '▶'
-let g:airline_right_sep = '«'
-let g:airline_right_sep = '◀'
-"let g:airline_symbols.crypt = '🔒'
-let g:airline_symbols.linenr = '␊'
-let g:airline_symbols.linenr = '␤'
-let g:airline_symbols.linenr = '¶'
-let g:airline_symbols.maxlinenr = '☰'
-let g:airline_symbols.maxlinenr = ''
-let g:airline_symbols.branch = '⎇'
-let g:airline_symbols.paste = 'ρ'
-let g:airline_symbols.paste = 'Þ'
-let g:airline_symbols.paste = '∥'
-let g:airline_symbols.spell = 'Ꞩ'
-let g:airline_symbols.notexists = '∄'
-let g:airline_symbols.whitespace = 'Ξ'
-let g:airline_symbols.readonly = '卐'
+let g:airline_theme='molokai'
 let g:airline#extensions#branch#displayed_head_limit = 12
 let g:airline#extensions#branch#format = 1
 let g:airline#extensions#whitespace#show_message = 0
 let g:airline#extensions#tabline#enabled = 0
+if !has("win32") 
+	let g:airline_symbols.branch = '⎇'
+endif
 "let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#default#layout = [
       \ [ 'b', 'c' ],
       \ [ 'x', 'z', 'error', 'warning' ]
       \ ]
 
-
-
+"Update makeprg to waf when it is present
+if filereadable(expand("%:p:h")."/wscript")
+if has("win32") 
+	set makeprg=python\ waf
+else
+	set makeprg=waf
+endif
+	set errorformat=
+	set errorformat+=%f:%l:%c:%m
+	set errorformat+=%DWaf:\ Entering\ directory\ `%f'
+	set errorformat+=%XWaf:\ Leaving\ directory
+endif
 
 "Parse extra custom config file
 if filereadable(".vim.custom")
