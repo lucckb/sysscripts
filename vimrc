@@ -37,13 +37,16 @@ Plug 'flazz/vim-colorschemes'
 Plug 'scrooloose/nerdtree'
 Plug 'majutsushi/tagbar'
 Plug 'kien/ctrlp.vim'
-"Plug 'vim-scripts/c.vim'
 Plug 'WolfgangMehner/c-support'
 Plug 'tpope/vim-fugitive'
 Plug 'SirVer/ultisnips'
 Plug 'python-mode/python-mode'
 Plug 'vim-scripts/armasm'
 Plug 'jlanzarotta/bufexplorer'
+Plug 'tpope/vim-repeat'   "repeats latest .(dot)
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'itchyny/calendar.vim'
+
 
 function! BuildYCM(info)
   " info is a dictionary with 3 fields
