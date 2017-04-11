@@ -46,7 +46,8 @@ Plug 'jlanzarotta/bufexplorer'
 Plug 'tpope/vim-repeat'   "repeats latest .(dot)
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'itchyny/calendar.vim'
-
+Plug 'Shougo/vimproc.vim' , {'do' : 'make'}
+Plug 'Shougo/vimshell.vim'
 
 function! BuildYCM(info)
   " info is a dictionary with 3 fields
@@ -220,11 +221,22 @@ noremap <F2> :ccl<CR>
 if !exists("lb_grep_path")
 	let lb_grep_path='.'
 endif
-nnoremap <leader>fw :execute " grep -srnw --binary-files=without-match --exclude='*.lss' --exclude=tags --exclude-dir='.git' --exclude-dir='.hg' " . lb_grep_path . " -e " . expand("<cword>") . " " <bar> cwindow<CR>
+nnoremap <leader>fw :execute "silent grep! -srnw --binary-files=without-match --exclude=tags --exclude-dir='.git' " . lb_grep_path . " -e " . expand("<cword>") . " " <bar> cwindow<CR>
+
+function! LBAskForGrep()
+	call inputsave()
+	let sword = input('Enter grep word: ')
+	call inputrestore()
+	execute "silent grep! -srnw --binary-files=without-match --exclude=tags --exclude-dir='.git' " . g:lb_grep_path . " -e " . sword . " " | copen
+endfunction
+
+nnoremap <leader>fww :call LBAskForGrep()<CR>
 
 
-function! LBSetColors()
+
+
 "Color setup
+function! LBSetColors()
 if !has("gui_running") && (&t_Co <= 16)
 	hi Pmenu      ctermfg=Cyan    ctermbg=Blue cterm=None guifg=Cyan guibg=DarkBlue
 	hi PmenuSel   ctermfg=White   ctermbg=Blue cterm=Bold guifg=White guibg=DarkBlue gui=Bold
