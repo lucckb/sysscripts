@@ -221,13 +221,13 @@ noremap <F2> :ccl<CR>
 if !exists("lb_grep_path")
 	let lb_grep_path='.'
 endif
-nnoremap <leader>fw :execute "silent grep! -srnw --binary-files=without-match --exclude=tags --exclude-dir='.git' " . lb_grep_path . " -e " . expand("<cword>") . " " <bar> cwindow<CR>
+nnoremap <leader>fw :execute "grep! -srnw --binary-files=without-match --exclude=tags --exclude-dir='.git' " . lb_grep_path . " -e " . expand("<cword>") . " " <bar> cwindow<CR>
 
 function! LBAskForGrep()
 	call inputsave()
 	let sword = input('Enter grep word: ')
 	call inputrestore()
-	execute "silent grep! -srnw --binary-files=without-match --exclude=tags --exclude-dir='.git' " . g:lb_grep_path . " -e " . sword . " " | copen
+	execute "grep! -srnw --binary-files=without-match --exclude=tags --exclude-dir='.git' " . g:lb_grep_path . " -e " . sword . " " | copen
 endfunction
 
 nnoremap <leader>fww :call LBAskForGrep()<CR>
@@ -292,7 +292,7 @@ let g:C_CplusCFlags= '-Wall -g -O0 -c --std=gnu++14'
   endif
 
 " unicode symbols
-let g:airline_theme='molokai'
+"let g:airline_theme='luna'
 let g:airline#extensions#branch#displayed_head_limit = 12
 let g:airline#extensions#branch#format = 1
 let g:airline#extensions#whitespace#show_message = 0
