@@ -15,10 +15,12 @@ set shiftwidth=4 tabstop=4 noexpandtab cino=t0
 if has("win32") 
 	set guifont=Consolas:h11:cEASTEUROPE:qDRAFT
 	set clipboard=unnamed
+	let lb_tmp_directory=$TEMP
 else
 	set guifont=Monospace\ 11
 	set clipboard=unnamedplus
 	runtime ftplugin/man.vim
+	let lb_tmp_directory='/tmp'
 endif
 set foldmethod=syntax
 set foldlevel=30
@@ -101,8 +103,18 @@ set showmatch
 set hlsearch
 
 
-"set number
+"Undo file configuration
+if !isdirectory(lb_tmp_directory . "/_vim_")
+     call mkdir(lb_tmp_directory ."/_vim_", "", 0770)
+endif
+if !isdirectory(lb_tmp_directory . "/_vim_/undo-dir")
+	call mkdir(lb_tmp_directory . "/_vim_/undo-dir", "", 0700)
+endif
+let &undodir=lb_tmp_directory . '/_vim_/undo-dir'
+set undofile
 
+
+"set number
 filetype plugin indent on
 if has("gui_running")
 	colorscheme summerfruit256
