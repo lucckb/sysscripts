@@ -225,7 +225,7 @@ nnoremap <leader>h :bp<CR>
 nnoremap <leader>l :bn<CR>
 
 "Save editor state
-nnoremap <leader>ss :TlistClose<CR>:NERDTreeClose<CR>:mks! .session.vim<CR>
+nnoremap <leader>ss :TagbarClose<CR>:NERDTreeClose<CR>:mks! .session.vim<CR>
 noremap <F2> :ccl<CR>
 
 
