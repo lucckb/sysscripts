@@ -20,7 +20,7 @@ else
 	set guifont=Monospace\ 11
 	set clipboard=unnamedplus
 	runtime ftplugin/man.vim
-	let lb_tmp_directory='/tmp'
+	let lb_tmp_directory='/tmp/' . $USER
 endif
 set foldmethod=syntax
 set foldlevel=30
@@ -105,7 +105,7 @@ set hlsearch
 
 "Undo file configuration
 if !isdirectory(lb_tmp_directory . "/_vim_")
-     call mkdir(lb_tmp_directory ."/_vim_", "", 0770)
+     call mkdir(lb_tmp_directory ."/_vim_", "p", 0777)
 endif
 if !isdirectory(lb_tmp_directory . "/_vim_/undo-dir")
 	call mkdir(lb_tmp_directory . "/_vim_/undo-dir", "", 0700)
@@ -194,6 +194,13 @@ let g:alternateNoDefaultAlternate = 1
 
 "Determine number of procesors
 let &makeprg = 'make $* -j' . (system('nproc'))
+
+
+"Configure pymode
+let g:pymode_lint_options_pep8 =
+	\ { 'max_line_length' : 120,
+    \   'ignore' : 'E203,E201,E202,E211' }
+
 
 "Keyboard mapping stuff
 nnoremap <silent> <leader>1 :NERDTreeToggle<CR>
