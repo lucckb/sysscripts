@@ -50,6 +50,7 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'itchyny/calendar.vim'
 Plug 'Shougo/vimproc.vim' , {'do' : 'make'}
 Plug 'Shougo/vimshell.vim'
+Plug '1995parham/vim-spice'
 
 function! BuildYCM(info)
   " info is a dictionary with 3 fields
@@ -148,6 +149,7 @@ au BufNewFile,BufRead CMakeLists.txt set filetype=cmake tw=0
 au BufNewFile,BufRead *.cmake set filetype=cmake tw=0
 au BufNewFile,BufRead *.rs set filetype=rust tw=0
 au BufNewFile,BufRead *.S set filetype=armasm tw=0
+au BufNewFile,BufRead *.cir set filetype=spice tw=0
 
 
 "Enable syntax checking
@@ -337,6 +339,14 @@ endif
 	set errorformat+=%DWaf:\ Entering\ directory\ `%f'
 	set errorformat+=%XWaf:\ Leaving\ directory
 endif
+
+
+"allowing YouCompleteMe to work with UltiSnips
+let g:ycm_key_list_select_completion=[ '<Down>' ]
+let g:ycm_key_list_select_previous_completion=[ '<Up>' ]
+let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
 "Parse extra custom config file
 if filereadable(".vim.custom")
