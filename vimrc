@@ -15,6 +15,7 @@ set shiftwidth=4 tabstop=4 noexpandtab cino=t0
 if has("win32") 
 	set guifont=Consolas:h11:cEASTEUROPE:qDRAFT
 	set clipboard=unnamed
+	set grepprg=c:\msys64\usr\bin\grep.exe
 	let lb_tmp_directory=$TEMP
 else
 	set guifont=Monospace\ 11
@@ -159,8 +160,9 @@ let g:miniBufExplMapWindowNavVim = 1
 let g:miniBufExplMapWindowNavArrows = 1
 let g:miniBufExplMapCTabSwitchBufs = 1
 let g:miniBufExplModSelTarget = 1 
-
-
+if has("win32unix")
+	let g:ycm_server_python_interpreter="c:/Program\ Files/python3.6/python.exe"
+endif
 let g:clang_auto_select=1
 let g:clang_complete_auto=0
 let g:clang_complete_copen=1
@@ -320,6 +322,8 @@ let g:airline#extensions#whitespace#show_message = 0
 let g:airline#extensions#tabline#enabled = 0
 if !has("win32") 
 	let g:airline_symbols.branch = '⎇'
+else
+	let g:airline_symbols.readonly = '▼'
 endif
 "let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#default#layout = [
