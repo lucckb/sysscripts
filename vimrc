@@ -13,10 +13,15 @@ set wrap
 set encoding=utf-8
 set shiftwidth=4 tabstop=4 noexpandtab cino=t0
 if has("win32") 
-	set guifont=Consolas:h11:cEASTEUROPE:qDRAFT
+	set guifont=Consolas:h10:cEASTEUROPE:qDRAFT
 	set clipboard=unnamed
 	set grepprg=c:\msys64\usr\bin\grep.exe
 	let lb_tmp_directory=$TEMP
+elseif has("win32unix")
+	set guifont=Monospace\ 11
+	set clipboard=unnamed
+	runtime ftplugin/man.vim
+	let lb_tmp_directory='/tmp/' . $USER
 else
 	set guifont=Monospace\ 11
 	set clipboard=unnamedplus
