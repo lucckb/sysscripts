@@ -63,7 +63,7 @@ function! BuildYCM(info)
   " - name:   name of the plugin
   " - status: 'installed', 'updated', or 'unchanged'
   " - force:  set on PlugInstall! or PlugUpdate!
-  if a:info.status == 'installed' || a:info.force
+  if a:info.status != 'unchanged' || a:info.force
 	if has("win32") 
 		!python3 ./install.py --clang-completer
 	else
@@ -311,7 +311,7 @@ command! -nargs=1 -complete=file	Ctags :!ctags -R --c++-kinds=+p --fields=+iaS -
 autocmd FileType help wincmd L
 
 "Single line compilation
-let g:C_CplusCFlags= '-Wall -g -O0 -c --std=gnu++14'
+let g:C_CplusCFlags= '-Wall -g -O0 -c --std=gnu++17'
 
 "airline config
 "
