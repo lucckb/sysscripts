@@ -128,7 +128,16 @@ if has("gui_running")
 	"set guioptions-=m
 	set guioptions-=T
 elseif ( &t_Co == 256 )
-	colorscheme lettuce
+	if has("unix")
+		let s:uname = system("uname -s")
+		if s:uname =~ "Darwin*"
+			colorscheme summerfruit256
+		else 
+			colorscheme lettuce
+		endif
+	else 
+		colorscheme lettuce
+	endif
 else
 	colorscheme darkblue
 endif
