@@ -30,10 +30,10 @@ flags = [
 '-Wno-variadic-macros',
 '-fexceptions',
 '-nostdinc',
-'-std=c++11',
+'-std=c++17',
 '-x', 'c++',
 ]
-# For check the compiler paths call `gcc -print-prog-name=cc1plus` -v 
+# For check the compiler paths call `gcc -print-prog-name=cc1plus` -v
 # Compatibility with clang complete
 if os.path.isfile('.clang_complete'):
     with open('.clang_complete') as clf:
@@ -41,20 +41,20 @@ if os.path.isfile('.clang_complete'):
         flags += content
 else:
     flags += [
-            '-isystem',
-            '/usr/lib/gcc/x86_64-unknown-linux-gnu/5.2.0/../../../../include/c++/5.2.0',
-            '-isystem',
-            '/usr/lib/gcc/x86_64-unknown-linux-gnu/5.2.0/../../../../include/c++/5.2.0/x86_64-unknown-linux-gnu',
-            '-isystem',
-            '/usr/lib/gcc/x86_64-unknown-linux-gnu/5.2.0/../../../../include/c++/5.2.0/backward',
-            '-isystem',
-            '/usr/lib/gcc/x86_64-unknown-linux-gnu/5.2.0/include',
-            '-isystem',
-            '/usr/local/include',
-            '-isystem',
-            '/usr/lib/gcc/x86_64-unknown-linux-gnu/5.2.0/include-fixed',
-            '-isystem',
+            '-I',
             '/usr/include'
+            '-isystem',
+            '/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/../../../../include/c++/8.2.1'
+            '-isystem',
+            '/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/../../../../include/c++/8.2.1/x86_64-pc-linux-gnu',
+            '-isystem',
+            '/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/../../../../include/c++/8.2.1/backward',
+            '-isystem',
+            '/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/include',
+            '-isystem',
+            '/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/include-fixed',
+            '-I',
+            '/usr/local/include',
         ]
 
 
