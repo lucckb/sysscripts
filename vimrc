@@ -24,9 +24,13 @@ elseif has("win32unix")
 	let lb_tmp_directory='/tmp/' . $USER
 else
 	set guifont=Monospace\ 11
-	set clipboard=unnamedplus
+	"set clipboard=unnamed
 	runtime ftplugin/man.vim
 	let lb_tmp_directory='/tmp/' . $USER
+endif
+
+if has("mac")
+	set clipboard=unnamed
 endif
 set foldmethod=syntax
 set foldlevel=30
@@ -177,6 +181,7 @@ let g:miniBufExplModSelTarget = 1
 if has("win32unix")
 	let g:ycm_server_python_interpreter="c:/Program\ Files/python3.6/python.exe"
 endif
+
 let g:clang_auto_select=1
 let g:clang_complete_auto=0
 let g:clang_complete_copen=1
@@ -349,6 +354,8 @@ let g:airline#extensions#default#layout = [
 if filereadable(expand("%:p:h")."/wscript")
 if has("win32") 
 	set makeprg=python\ waf
+elseif has("mac")
+	set makeprg=python3\ waf
 else
 	set makeprg=waf
 endif
