@@ -319,7 +319,7 @@ au FileType c,cpp inorea #i #include
 au FileType c,cpp inorea #d #define
 
 "Extra commands
-command! -nargs=1 -complete=file	Ctags :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q "<args>"
+command! -nargs=1 -complete=file	Ctags :!ctags -R --c++-kinds=+p --fields=+iaS --extras=+q "<args>"
 
 "Horizontal help
 autocmd FileType help wincmd L
