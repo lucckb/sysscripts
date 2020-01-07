@@ -51,7 +51,7 @@ Plug 'majutsushi/tagbar'
 Plug 'kien/ctrlp.vim'
 Plug 'WolfgangMehner/c-support'
 Plug 'tpope/vim-fugitive'
-Plug 'SirVer/ultisnips'
+"Plug 'SirVer/ultisnips'
 Plug 'python-mode/python-mode'
 Plug 'vim-scripts/armasm'
 Plug 'jlanzarotta/bufexplorer'
@@ -62,20 +62,20 @@ Plug 'Shougo/vimproc.vim' , {'do' : 'make'}
 Plug 'Shougo/vimshell.vim'
 Plug '1995parham/vim-spice'
 
-function! BuildYCM(info)
+"function! BuildYCM(info)
   " info is a dictionary with 3 fields
   " - name:   name of the plugin
   " - status: 'installed', 'updated', or 'unchanged'
   " - force:  set on PlugInstall! or PlugUpdate!
-  if a:info.status != 'unchanged' || a:info.force
-	if has("win32") 
-		!python3 ./install.py --clang-completer
-	else
-		!python3 ./install.py --clang-completer --system-libclang --system-boost
-	endif
-  endif
-endfunction
-Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
+  "if a:info.status != 'unchanged' || a:info.force
+	"if has("win32") 
+	"	!python3 ./install.py --clang-completer
+	"else
+	"	!python3 ./install.py --clang-completer --system-libclang --system-boost
+	"endif
+  "endif
+"endfunction
+"Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
 call plug#end()
 "vimplug end
 
