@@ -61,6 +61,7 @@ Plug 'itchyny/calendar.vim'
 Plug 'Shougo/vimproc.vim' , {'do' : 'make'}
 Plug 'Shougo/vimshell.vim'
 Plug '1995parham/vim-spice'
+Plug 'morhetz/gruvbox'
 
 function! BuildYCM(info)
   " info is a dictionary with 3 fields
@@ -71,7 +72,8 @@ function! BuildYCM(info)
 	if has("win32") 
 		!python3 ./install.py --clang-completer
 	else
-		!python3 ./install.py --clang-completer --system-libclang --system-boost
+		"!python3 ./install.py --clang-completer --system-libclang
+		!python3 ./install.py --clangd-completer
 	endif
   endif
 endfunction
@@ -134,11 +136,8 @@ if has("gui_running")
 elseif ( &t_Co == 256 )
 	if has("unix")
 		let s:uname = system("uname -s")
-		if s:uname =~ "Darwin*"
-			colorscheme summerfruit256
-		else 
-			colorscheme lettuce
-		endif
+			colorscheme gruvbox
+			let g:gruvbox_italics=1
 	else 
 		colorscheme lettuce
 	endif
@@ -210,6 +209,9 @@ let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_global_ycm_extra_conf='~/worksrc/sysscripts/ycm_extra_conf.py'
 nnoremap <leader>jd :YcmCompleter GoToDefinition<CR>
 nnoremap <leader>je :YcmCompleter GoToDeclaration<CR>
+nnoremap <leader>gf :YcmCompleter GoToInclude<CR>
+nmap <leader>yfw <Plug>(YCMFindSymbolInWorkspace)
+nmap <leader>yfd <Plug>(YCMFindSymbolInDocument)
 nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
 
 "Csupport
