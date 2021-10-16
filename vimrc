@@ -217,10 +217,13 @@ let g:ycm_complete_in_strings = 1
 nnoremap <leader>ygd :YcmCompleter GoToDefinition<CR>
 nnoremap <leader>ygh :YcmCompleter GoToDeclaration<CR>
 nnoremap <leader>ygt :YcmCompleter GetType<CR>
+nnoremap <leader>ygr :YcmCompleter GoToReferences<CR>
 nnoremap <leader>gf :YcmCompleter GoToInclude<CR>
 nnoremap <leader>yfw <Plug>(YCMFindSymbolInWorkspace)
 nnoremap <leader>yfd <Plug>(YCMFindSymbolInDocument)
 nnoremap <leader>yfi :YcmCompleter FixIt<CR>
+nnoremap <leader>ycf :YcmCompleter Format<CR>
+nnoremap <leader>ycr :YcmCompleter RefactorRename<CR>
 nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
 
 "Csupport
