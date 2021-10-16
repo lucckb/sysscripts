@@ -51,7 +51,7 @@ Plug 'majutsushi/tagbar'
 Plug 'kien/ctrlp.vim'
 Plug 'WolfgangMehner/c-support'
 Plug 'tpope/vim-fugitive'
-"Plug 'SirVer/ultisnips'
+Plug 'SirVer/ultisnips'
 Plug 'python-mode/python-mode'
 Plug 'vim-scripts/armasm'
 Plug 'jlanzarotta/bufexplorer'
@@ -203,16 +203,24 @@ let g:Tlist_Use_Right_Window=1
 "Configuration for YouCompleteMe
 let g:ycm_confirm_extra_conf = 0
 let g:syntastic_always_populate_loc_list = 1
+let g:ycm_always_populate_location_list = 1
 let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_add_preview_to_completeopt = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_clangd_uses_ycmd_caching = 0
-let g:ycm_global_ycm_extra_conf='~/worksrc/sysscripts/ycm_extra_conf.py'
-nnoremap <leader>jd :YcmCompleter GoToDefinition<CR>
-nnoremap <leader>je :YcmCompleter GoToDeclaration<CR>
+let g:ycm_min_num_of_chars_for_completion = 3
+let g:ycm_error_symbol = '▸'
+let g:ycm_warning_symbol = '▸'
+let g:ycm_complete_in_comments = 1
+let g:ycm_complete_in_strings = 1
+"let g:ycm_global_ycm_extra_conf='~/worksrc/sysscripts/ycm_extra_conf.py'
+nnoremap <leader>ygd :YcmCompleter GoToDefinition<CR>
+nnoremap <leader>ygh :YcmCompleter GoToDeclaration<CR>
+nnoremap <leader>ygt :YcmCompleter GetType<CR>
 nnoremap <leader>gf :YcmCompleter GoToInclude<CR>
-nmap <leader>yfw <Plug>(YCMFindSymbolInWorkspace)
-nmap <leader>yfd <Plug>(YCMFindSymbolInDocument)
+nnoremap <leader>yfw <Plug>(YCMFindSymbolInWorkspace)
+nnoremap <leader>yfd <Plug>(YCMFindSymbolInDocument)
+nnoremap <leader>yfi :YcmCompleter FixIt<CR>
 nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
 
 "Csupport
@@ -227,6 +235,14 @@ let g:pymode_lint_options_pep8 =
 	\ { 'max_line_length' : 120,
     \   'ignore' : 'E203,E201,E202,E211' }
 
+"Location list mappings
+nnoremap <leader>lo :lopen<CR>
+nnoremap <leader>lc :lclose<CR>
+nnoremap <leader>ll :ll<CR>
+nnoremap <leader>ln :lnext<CR>
+nnoremap <leader>lp :lprevious<CR>
+nnoremap <leader>lf :lfirst<CR>
+nnoremap <leader>la :llast<CR>
 
 "Keyboard mapping stuff
 nnoremap <silent> <leader>1 :NERDTreeToggle<CR>
