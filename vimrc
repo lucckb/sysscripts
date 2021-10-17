@@ -11,7 +11,7 @@ set showcmd
 set wim=longest,list
 set wrap
 set encoding=utf-8
-set shiftwidth=4 tabstop=4 noexpandtab cino=t0
+set shiftwidth=4 tabstop=4 softtabstop=4 expandtab cino=t0
 if has("win32") 
 	set guifont=Consolas:h10:cEASTEUROPE:qDRAFT
 	set clipboard=unnamed
@@ -52,7 +52,8 @@ Plug 'kien/ctrlp.vim'
 Plug 'WolfgangMehner/c-support'
 Plug 'tpope/vim-fugitive'
 Plug 'SirVer/ultisnips'
-Plug 'python-mode/python-mode'
+Plug 'honza/vim-snippets'
+Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
 Plug 'vim-scripts/armasm'
 Plug 'jlanzarotta/bufexplorer'
 Plug 'tpope/vim-repeat'   "repeats latest .(dot)
@@ -213,7 +214,11 @@ let g:ycm_error_symbol = '▸'
 let g:ycm_warning_symbol = '▸'
 let g:ycm_complete_in_comments = 1
 let g:ycm_complete_in_strings = 1
-"let g:ycm_global_ycm_extra_conf='~/worksrc/sysscripts/ycm_extra_conf.py'
+"	allowing YouCompleteMe to work with UltiSnips
+let g:UltiSnipsExpandTrigger = "<S-t>"
+let g:UltiSnipsJumpForwardTrigger = "<S-f>"
+let g:UltiSnipsJumpBackwardTrigger = "<S-b>"
+"	ycm remapping functions
 nnoremap <leader>ygd :YcmCompleter GoToDefinition<CR>
 nnoremap <leader>ygh :YcmCompleter GoToDeclaration<CR>
 nnoremap <leader>ygt :YcmCompleter GetType<CR>
@@ -387,13 +392,23 @@ endif
 	set errorformat+=%XWaf:\ Leaving\ directory
 endif
 
+" CTRL-P configuration
+let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+let g:ctrlp_custom_ignore = {
+	\ 'dir':  '\v[\/]\.(git|hg|svn)$',
+	\ 'file': '\v\.(exe|so|dll)$',
+	\ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
+	\ }
+if !has("win32")
+let g:ctrlp_user_command = {
+	\ 'types': {
+		\ 1: ['.git', 'cd %s && git ls-files'],
+		\ 2: ['.hg', 'hg --cwd %s locate -I .'],
+		\ },
+	\ 'fallback': 'find %s -type f'
+	\ }
+endif
 
-"allowing YouCompleteMe to work with UltiSnips
-let g:ycm_key_list_select_completion=[ '<Down>' ]
-let g:ycm_key_list_select_previous_completion=[ '<Up>' ]
-let g:UltiSnipsExpandTrigger = "<tab>"
-let g:UltiSnipsJumpForwardTrigger = "<tab>"
-let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
 "Parse extra custom config file
 if filereadable(".vim.custom")
