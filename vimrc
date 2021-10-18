@@ -215,9 +215,9 @@ let g:ycm_warning_symbol = '▸'
 let g:ycm_complete_in_comments = 1
 let g:ycm_complete_in_strings = 1
 "	allowing YouCompleteMe to work with UltiSnips
-let g:UltiSnipsExpandTrigger = "<S-t>"
-let g:UltiSnipsJumpForwardTrigger = "<S-f>"
-let g:UltiSnipsJumpBackwardTrigger = "<S-b>"
+let g:UltiSnipsExpandTrigger = "<C-space>"
+let g:UltiSnipsJumpForwardTrigger = "<C-f>"
+let g:UltiSnipsJumpBackwardTrigger = "<C-b>"
 "	ycm remapping functions
 nnoremap <leader>ygd :YcmCompleter GoToDefinition<CR>
 nnoremap <leader>ygh :YcmCompleter GoToDeclaration<CR>
