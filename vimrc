@@ -12,6 +12,7 @@ set wim=longest,list
 set wrap
 set encoding=utf-8
 set shiftwidth=4 tabstop=4 softtabstop=4 expandtab cino=t0
+
 if has("win32") 
 	set guifont=Consolas:h10:cEASTEUROPE:qDRAFT
 	set clipboard=unnamed
@@ -174,31 +175,13 @@ au BufNewFile,BufRead *.cir set filetype=spice tw=0
 "Enable syntax checking
 syntax on
 
+" MiniBuf explorer
 let g:miniBufExplMapWindowNavVim = 1
 let g:miniBufExplMapWindowNavArrows = 1
 let g:miniBufExplMapCTabSwitchBufs = 1
 let g:miniBufExplModSelTarget = 1 
-if has("win32unix")
-	let g:ycm_server_python_interpreter="c:/Program\ Files/python3.6/python.exe"
-endif
 
-let g:clang_auto_select=1
-let g:clang_complete_auto=0
-let g:clang_complete_copen=1
-let g:clang_hl_errors=1
-let g:clang_periodic_quickfix=0
-let g:clang_snippets=1
-let g:clang_snippets_engine="clang_complete"
-let g:clang_conceal_snippets=1
-let g:clang_exec="clang"
-let g:clang_user_options=""
-let g:clang_auto_user_options="path, .clang_complete"
-let g:clang_use_library=1
-let g:clang_close_preview=1
-set completeopt-=preview
-let g:clang_sort_algo="priority"
-let g:clang_complete_macros=1
-let g:clang_complete_patterns=0
+"TagList
 let g:Tlist_Use_Right_Window=1
 
 "Configuration for YouCompleteMe
@@ -310,28 +293,12 @@ endfunction
 nnoremap <leader>fww :call LBAskForGrep()<CR>
 
 
-
-
-"Color setup
-function! LBSetColors()
-if !has("gui_running") && (&t_Co <= 16)
-	hi Pmenu      ctermfg=Cyan    ctermbg=Blue cterm=None guifg=Cyan guibg=DarkBlue
-	hi PmenuSel   ctermfg=White   ctermbg=Blue cterm=Bold guifg=White guibg=DarkBlue gui=Bold
-	hi PmenuSbar                  ctermbg=Cyan            guibg=Cyan
-	hi PmenuThumb ctermfg=White                           guifg=White
-	hi LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
-endif
-endfunction
-
-exec LBSetColors()
-
 " Makefile no expand tabs
 autocmd FileType make setlocal noexpandtab
 "Make and windowlist
 autocmd QuickFixCmdPost [^l]* nested botrigh cwindow
 autocmd QuickFixCmdPost l* nested botright lwindow
-"Session restore autocommand recover vimrc
-autocmd SessionLoadPost * :call LBSetColors()
+
 "Enable mouse integration
 set mouse=a
 
@@ -353,7 +320,7 @@ inoremap <PAGEDOWN> <nop>
 au FileType c,cpp inorea #i #include
 au FileType c,cpp inorea #d #define
 
-"Extra commands
+"Ctag special command
 command! -nargs=1 -complete=file	Ctags :!ctags -R --c++-kinds=+p --fields=+iaS "<args>"
 
 "Horizontal help
@@ -367,7 +334,6 @@ let g:C_CplusCFlags= '-Wall -g -O0 -c --std=gnu++17'
   if !exists('g:airline_symbols')
     let g:airline_symbols = {}
   endif
-
 " unicode symbols
 "let g:airline_theme='luna'
 let g:airline#extensions#branch#displayed_head_limit = 12
