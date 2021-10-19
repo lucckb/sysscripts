@@ -202,6 +202,14 @@ let g:clang_complete_patterns=0
 let g:Tlist_Use_Right_Window=1
 
 "Configuration for YouCompleteMe
+" Functions
+function! LBAskForRefactor()
+	call inputsave()
+	let sword = input('New symbol name: ')
+	call inputrestore()
+       execute 'YcmCompleter RefactorRename ' . sword
+endfunction
+" Variables
 let g:ycm_confirm_extra_conf = 0
 let g:syntastic_always_populate_loc_list = 1
 let g:ycm_always_populate_location_list = 1
@@ -228,7 +236,7 @@ nmap <leader>yfw <Plug>(YCMFindSymbolInWorkspace)
 nmap <leader>yfd <Plug>(YCMFindSymbolInDocument)
 nnoremap <leader>yfi :YcmCompleter FixIt<CR>
 nnoremap <leader>ycf :YcmCompleter Format<CR>
-nnoremap <leader>ycr :YcmCompleter RefactorRename<CR>
+nnoremap <leader>ycr :call LBAskForRefactor()<CR>
 nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
 
 "Csupport
@@ -346,7 +354,7 @@ au FileType c,cpp inorea #i #include
 au FileType c,cpp inorea #d #define
 
 "Extra commands
-command! -nargs=1 -complete=file	Ctags :!ctags -R --c++-kinds=+p --fields=+iaS --extras=+q "<args>"
+command! -nargs=1 -complete=file	Ctags :!ctags -R --c++-kinds=+p --fields=+iaS "<args>"
 
 "Horizontal help
 autocmd FileType help wincmd L
