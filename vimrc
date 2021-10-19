@@ -224,8 +224,8 @@ nnoremap <leader>ygh :YcmCompleter GoToDeclaration<CR>
 nnoremap <leader>ygt :YcmCompleter GetType<CR>
 nnoremap <leader>ygr :YcmCompleter GoToReferences<CR>
 nnoremap <leader>gf :YcmCompleter GoToInclude<CR>
-nnoremap <leader>yfw <Plug>(YCMFindSymbolInWorkspace)
-nnoremap <leader>yfd <Plug>(YCMFindSymbolInDocument)
+nmap <leader>yfw <Plug>(YCMFindSymbolInWorkspace)
+nmap <leader>yfd <Plug>(YCMFindSymbolInDocument)
 nnoremap <leader>yfi :YcmCompleter FixIt<CR>
 nnoremap <leader>ycf :YcmCompleter Format<CR>
 nnoremap <leader>ycr :YcmCompleter RefactorRename<CR>
