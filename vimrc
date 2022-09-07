@@ -64,6 +64,7 @@ Plug 'Shougo/vimproc.vim' , {'do' : 'make'}
 Plug 'Shougo/vimshell.vim'
 Plug '1995parham/vim-spice'
 Plug 'morhetz/gruvbox'
+Plug 'rhysd/vim-clang-format'
 
 function! BuildYCM(info)
   " info is a dictionary with 3 fields
@@ -281,13 +282,13 @@ noremap <F2> :ccl<CR>
 if !exists("lb_grep_path")
 	let lb_grep_path='.'
 endif
-nnoremap <leader>fw :execute "grep! -srnw --binary-files=without-match --exclude=tags --exclude-dir='.git' " . lb_grep_path . " -e " . expand("<cword>") . " " <bar> cwindow<CR>
+nnoremap <leader>fw :execute "grep! -srnw --binary-files=without-match --exclude=tags --exclude='*.html' --exclude='*.js' --exclude-dir='.git' " . lb_grep_path . " -e " . expand("<cword>") . " " <bar> cwindow<CR>
 
 function! LBAskForGrep()
 	call inputsave()
 	let sword = input('Enter grep word: ')
 	call inputrestore()
-	execute "grep! -srnw --binary-files=without-match --exclude=tags --exclude-dir='.git' " . g:lb_grep_path . " -e " . sword . " " | copen
+	execute "grep! -srnw --binary-files=without-match --exclude=tags --exclude='*.html' --exclude='*.js' --exclude-dir='.git' " . g:lb_grep_path . " -e " . sword . " " | copen
 endfunction
 
 nnoremap <leader>fww :call LBAskForGrep()<CR>
@@ -383,6 +384,8 @@ let g:ctrlp_user_command = {
 	\ }
 endif
 
+"Clang auto formating
+autocmd FileType {c,cpp} ClangFormatAutoEnable
 
 "Parse extra custom config file
 if filereadable(".vim.custom")
