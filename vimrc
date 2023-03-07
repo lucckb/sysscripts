@@ -385,7 +385,7 @@ let g:ctrlp_user_command = {
 endif
 
 "Clang auto formating
-autocmd FileType {c,cpp} ClangFormatAutoEnable
+"autocmd FileType {c,cpp} ClangFormatAutoEnable
 
 "Parse extra custom config file
 if filereadable(".vim.custom")
